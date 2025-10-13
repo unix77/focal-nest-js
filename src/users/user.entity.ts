@@ -1,4 +1,7 @@
 import {
+  AfterInsert,
+  AfterRemove,
+  AfterUpdate,
   Entity,
   Column,
   PrimaryGeneratedColumn,
@@ -39,5 +42,20 @@ export class User {
     if (!this.id) {
       this.id = uuidv4();
     }
+  }
+
+  @AfterInsert()
+  logInsert() {
+    console.log(`A new user has been inserted with id: ${this.id}`);
+  }
+
+  @AfterUpdate()
+  logUpdate() {
+    console.log(`User with id: ${this.id} has been updated`);
+  }
+
+  @AfterRemove()
+  logRemove() {
+    console.log(`User with id: ${this.id} has been removed`);
   }
 }
